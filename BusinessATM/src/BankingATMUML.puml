@@ -1,0 +1,53 @@
+@startuml
+
+class User {
+  -username : String
+  -password : String
+  +login() : boolean
+  +logout() : void
+  +manageAccounts() : void
+}
+
+class Account {
+  -accountNumber : String
+  -balance : double
+  -overdraftLimit : double
+  +checkBalance() : double
+  +withdraw(amount : double) : boolean
+  +deposit(amount : double) : boolean
+  +transferTo(account : Account, amount : double) : boolean
+}
+
+class SmallBusinessAccount {
+  -accountType : String
+  -overdraftLimit : double = 1000
+  +createAccount() : void
+}
+
+class CommunityAccount {
+  -accountType : String
+  -overdraftLimit : double = 2500
+  +createAccount() : void
+}
+
+class ClientAccount {
+  -accountType : String
+  -overdraftLimit : double = 1500
+  +createAccount() : void
+}
+
+class TwoSignatoryAccount {
+  -signatory1 : User
+  -signatory2 : User
+  +checkSignatories() : boolean
+}
+
+User -- Account
+Account <|-- SmallBusinessAccount
+Account <|-- CommunityAccount
+Account <|-- ClientAccount
+TwoSignatoryAccount <|-- SmallBusinessAccount
+TwoSignatoryAccount <|-- CommunityAccount
+TwoSignatoryAccount <|-- ClientAccount
+
+@enduml
